@@ -31,6 +31,7 @@ class DB // 建立基礎屬性
      * ($array,$sql) //有欄位條件又有額外條件的多筆資料 (...where ...limit ..., ...where ...order by ...)
      * () //不帶任何參數 = 整張資料表
      * ($sql) //只有額外條件的多筆資料 (...limit...,order by ...,group by ...)
+     * 
      */
      
 /*----------------------------------------------------------------------------------------------------*/ 
@@ -68,24 +69,77 @@ class DB // 建立基礎屬性
             $sql .= " `id`='$arg'";
         }
 
-        echo $sql;
+        // echo $sql;
         return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
 /*----------------------------------------------------------------------------------------------------*/
-    function save(){}
+    function save($array){
+        if(isset($array['id'])){
+            //更新
+            foreach($array as $key => $val){
+                $tmp[]="`$key`='$val'";
+            }
+            $sql="update $this->table set  ".join(',',$tmp)."  where `id`='{$array['id']}'";
+        }else{
+            //新增
+            $sql="insert into $this->table (`".join("`,`",array_keys($array))."`) values('".join("','",$array)."')";
+        }
+
+        // echo $sql;
+        return $this->pdo->exec($sql);
+    }
 /*----------------------------------------------------------------------------------------------------*/
-    function del(){}
+    function del($arg){
+        $sql="delete from $this->table where";
+        if(is_array($arg)){
+            foreach($arg as $key => $val){
+                $tmp[]="`$key`='$val'";
+            }
+            $sql .= join(" && ",$tmp);
+        }else{
+            $sql .= " `id`='$arg'";
+        }
+
+        return $this->pdo->exec($sql);
+    }
 /*----------------------------------------------------------------------------------------------------*/
-    function math(){}
+    function math($math,$col,...$arg){
+        $sql="select $math($col) from $this->table ";
+        if(isset($arg[0])){
+            if(is_array($arg[0])){
+                foreach($arg[0] as $key => $val){
+                    $tmp[]="`$key`='$val'";
+                }
+                $sql .= $arg[0];
+            }
+        }
+
+        if(isset($arg[1])){
+            $sql .= $arg[1];
+        }
+
+        // echo $sql;
+        return $this->pdo->query($sql)->fetchColumn();
+    }
 /*----------------------------------------------------------------------------------------------------*/
     function q($sql){
         return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    }
+/*----------------------------------------------------------------------------------------------------*/
+    function dd($array){
+        echo "<pre>";
+        print_r($array);
+        echo "</pre>";
+    }
+/*----------------------------------------------------------------------------------------------------*/
+    function to($url){
+        header('location:'.$url);
     }
 /*----------------------------------------------------------------------------------------------------*/
 
 }
 
 $Total=new DB('total');
-print_r($Total->all(['total'=>10]));
+// print_r($Total->find(['total'=>10]));
 
 ?>
