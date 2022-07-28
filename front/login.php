@@ -23,3 +23,19 @@
         </tr>
     </table>
 </fieldset>
+
+<!-- 判斷會員登入,使用AJAX -->
+<script>
+    function login(){
+        let acc=$("#acc").val();
+        let pw=$("#pw").val();
+        // $.post("./api/chk_acc.php",{acc:acc}); //謹慎版本
+        $.post("./api/chk_acc.php",{acc},(res)=>{
+            if(parseInt(res)===1){
+
+            }else{
+                alert("查無帳號");
+            }
+        });
+    }
+</script>
