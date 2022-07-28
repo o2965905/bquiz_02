@@ -1,4 +1,3 @@
-<!-- 檢驗帳號 -->
 <?php
 include_once "../base.php";
 

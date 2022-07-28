@@ -1,6 +1,6 @@
-<!-- 會員登入 -->
 <fieldset>
     <legend>會員登入</legend>
+
     <table>
         <tr>
             <td class="clo">帳號</td>
@@ -23,7 +23,6 @@
     </table>
 </fieldset>
 
-<!-- 判斷會員登入,使用AJAX -->
 <script>
 function login(){
     let acc=$("#acc").val();
@@ -48,4 +47,5 @@ function login(){
         }
     })
 }
+
 </script>

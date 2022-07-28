@@ -1,4 +1,3 @@
-<!-- 檢查密碼 -->
 <?php
 include_once "../base.php";
 
