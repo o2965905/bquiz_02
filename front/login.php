@@ -1,7 +1,6 @@
 <!-- 會員登入 -->
 <fieldset>
     <legend>會員登入</legend>
-    
     <table>
         <tr>
             <td class="clo">帳號</td>
@@ -16,7 +15,7 @@
                 <button onclick="login()">登入</button>
                 <button onclick="reset()">清除</button>
             </td>
-            <td class="r">
+            <td class='r'>
                 <a href="?do=forgot">忘記密碼</a>
                 <a href="?do=reg">尚未註冊</a>
             </td>
@@ -26,16 +25,27 @@
 
 <!-- 判斷會員登入,使用AJAX -->
 <script>
-    function login(){
-        let acc=$("#acc").val();
-        let pw=$("#pw").val();
-        // $.post("./api/chk_acc.php",{acc:acc}); //謹慎版本
-        $.post("./api/chk_acc.php",{acc},(res)=>{
-            if(parseInt(res)===1){
-
-            }else{
-                alert("查無帳號");
-            }
-        });
-    }
+function login(){
+    let acc=$("#acc").val();
+    let pw=$("#pw").val();
+    $.post("./api/chk_acc.php",{acc},(res)=>{
+        console.log('acc',res)
+        if(parseInt(res)===1){
+            $.post("./api/chk_pw.php",{acc,pw},(res)=>{
+                console.log('pw',res)
+                if(parseInt(res)===1){
+                    if(acc==='admin'){
+                        location.href='back.php'
+                    }else{
+                        location.href='index.php'
+                    }
+                }else{
+                    alert("密碼錯誤");
+                }
+            })
+        }else{
+            alert("查無帳號")
+        }
+    })
+}
 </script>

@@ -146,12 +146,10 @@ function to($url){
 $Total=new DB('total');
 $User=new DB('user');
 
-
 if(!isset($_SESSION['total'])){
     $chkDate=$Total->math('count','id',['date'=>date("Y-m-d")]);
     if($chkDate>=1){
         $total=$Total->find(['date'=>date("Y-m-d")]);
-        // dd($total);
         $total['total']=$total['total']+1;
         $Total->save($total);
         $_SESSION['total']=1;
