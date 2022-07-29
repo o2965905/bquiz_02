@@ -20,8 +20,46 @@
             <td><input type="text" name="email" id="email"></td>
         </tr>
         <tr>
-            <td><button>註冊</button><button>清除</button></td>
+            <td>
+                <button onclick="reg()">註冊</button>
+                <button onclick="$('table input').val('')">清除</button>
+            </td>
             <td></td>
         </tr>
     </table>
 </fieldset>
+
+<script>
+    function reg() {
+        let user = {
+            acc: $("#acc").val(),
+            pw: $("#pw").val(),
+            pw2: $("#pw2").val(),
+            email: $("#email").val()
+        }
+
+        //1.先檢查欄位是否沒有輸入資料
+        if(user.acc=='' || user.pw=='' || user.pw2=='' || user.email==''){
+            alert("不可空白")
+        }else if(user.pw!=user.pw2){ //2.密碼跟再次確認密碼是否一致
+            alert("密碼錯誤")
+        }else{ //3.帳號是否重複註冊
+            $.get("./api/chk_acc.php",{acc:user.acc},(res)=>{
+                console.log(res)
+                if(parseInt(res)==1){
+                    alert("帳號重複")
+                }else{
+                    $.post("./api/reg.php",user,(res)=>{
+                        // console.log(res)
+                        alert("註冊完成，歡迎加入")
+                        location.href="?do=login"
+                    })
+                }
+            })
+        }
+
+        // 補充: AJAX裡面 $.get() 和 $.post 差異
+        // $.get() => 取得(獲取)資料
+        // $.post() => 新增一筆資料
+    }
+</script>
