@@ -5,7 +5,7 @@ include_once "../base.php";
 
 $users = $User->all();
 foreach ($users as $user) {
-    if ($user['acc'] !== 'admin') {
+    if ($user['acc'] !== 'admin') { //撈出管理者'admin'帳號以外的使用者資訊
         echo "<tr>";
         echo "<td>{$user['acc']}</td>";
         echo "<td>" . str_repeat("*", strlen($user['pw'])) . "</td>";
