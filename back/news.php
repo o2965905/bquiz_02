@@ -8,7 +8,15 @@
         <th width="10%">刪除</th>
     </tr>
     <?php
-    $rows = $News->all();
+    // 分頁
+    $all=$News->math('count','id');
+    $div=3;
+    $pages=ceil($all/$div);
+    $now=$_GET['p']??1;
+    $start=($now-1)*$div;
+    $rows = $News->all(" limit $start ,$div");
+
+    // 文章內容
     foreach ($rows as $key => $row) {
     ?>
         <tr>
