@@ -32,7 +32,7 @@
         <?php
             if(($now-1)>0){ //上一頁的符號『<』
                 $prev=$now-1;
-                 echo "<a href='?do=news&p=$prev'>";
+                echo "<a href='?do=news&p=$prev'>";
                 echo " < ";
                 echo "</a>";
             }
