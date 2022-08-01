@@ -16,7 +16,7 @@
         <tr>
             <td class="ct"><?=$key+1;?></td>
             <td><?=$subject['text'];?></td>
-            <td class="ct"><?$subject['count'];?></td>
+            <td class="ct"><?=$subject['count'];?></td>
             <td class="ct">
                 <a href="?do=result&id=<?$subject['id'];?>">結果</a>
             </td>
