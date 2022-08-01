@@ -31,7 +31,11 @@
             <!-- 按讚圖案 -->
             <td>
                 <span><?=$row['good'];?></span>個人說<img src="./icon/02B03.jpg" style='width:25px'>
-                <a class="great" href="#">讚</a>
+                <?php
+                if(isset($_SESSION['user'])){
+                    echo " - <a class='great' href='#'>讚</a>";
+                }
+                ?>
             </td>
         </tr>
         <?php
@@ -64,33 +68,24 @@
 </fieldset>
 <script>
     $(".title").hover(
-        // function (){
-        //     $(this).next().children('.modal').show()
-        // },
-        // function (){
-        //     $(this).next().children('.modal').hide()
-        // }
         function (){
             $(this).next().children('.modal').toggle()
         }
     )
     $(".pop").hover(
-        // function (){
-        //     $(this).children('.modal').show()
-        // },
-        // function (){
-        //     $(this).children('.modal').hide()
-        // }
         function (){
             $(this).children('.modal').toggle()
         }
     )
     $(".great").on("click",function(){
         let text=$(this).text()
+        let num=parseInt($(this).siblings('span').text())
         if(text==='讚'){
             text=$(this).text('收回讚')
+            $(this).siblings('span').text(num+1)
         }else{
             text=$(this).text('讚')
+            $(this).siblings('span').text(num-1)
         }
     })
 </script>
