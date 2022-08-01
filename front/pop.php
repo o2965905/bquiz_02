@@ -29,7 +29,10 @@
                 </div>
             </td>
             <!-- 按讚圖案 -->
-            <td><img src="./icon/02B03.jpg" style='width:25px'></td>
+            <td>
+                <span><?=$row['good'];?></span>個人說<img src="./icon/02B03.jpg" style='width:25px'>
+                <a class="great" href="#">讚</a>
+            </td>
         </tr>
         <?php
         }
@@ -82,5 +85,13 @@
             $(this).children('.modal').toggle()
         }
     )
+    $(".great").on("click",function(){
+        let text=$(this).text()
+        if(text==='讚'){
+            text=$(this).text('收回讚')
+        }else{
+            text=$(this).text('讚')
+        }
+    })
 </script>
 
