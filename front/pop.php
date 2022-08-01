@@ -19,8 +19,15 @@
         foreach($rows as $row){
         ?>
         <tr>
-            <td><?=$row['title'];?></td>
-            <td><?=mb_substr($row['text'],0,20);?>...</td>
+            <td class="title clo"><?=$row['title'];?></td>
+            <td class="pop">
+                <!-- 摘要 -->
+                <span class="summary"><?=mb_substr($row['text'],0,20);?>...</span>
+                <!-- 完整內容 -->
+                <div class="modal">
+                    <?=nl2br($row['text']);?>
+                </div>
+            </td>
             <td></td>
         </tr>
         <?php
@@ -51,4 +58,22 @@
         ?>
     </div>
 </fieldset>
+<script>
+    $(".title").hover(
+        function (){
+            $(this).next().children('.modal').show()
+        },
+        function (){
+            $(this).next().children('.modal').hide()
+        }
+    )
+    $(".pop").hover(
+        function (){
+            $(this).children('.modal').show()
+        },
+        function (){
+            $(this).children('.modal').hide()
+        }
+    )
+</script>
 
