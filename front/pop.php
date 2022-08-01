@@ -28,7 +28,8 @@
                     <?=nl2br($row['text']);?>
                 </div>
             </td>
-            <td></td>
+            <!-- 按讚圖案 -->
+            <td><img src="./icon/02B03.jpg" style='width:25px'></td>
         </tr>
         <?php
         }
@@ -60,19 +61,25 @@
 </fieldset>
 <script>
     $(".title").hover(
+        // function (){
+        //     $(this).next().children('.modal').show()
+        // },
+        // function (){
+        //     $(this).next().children('.modal').hide()
+        // }
         function (){
-            $(this).next().children('.modal').show()
-        },
-        function (){
-            $(this).next().children('.modal').hide()
+            $(this).next().children('.modal').toggle()
         }
     )
     $(".pop").hover(
+        // function (){
+        //     $(this).children('.modal').show()
+        // },
+        // function (){
+        //     $(this).children('.modal').hide()
+        // }
         function (){
-            $(this).children('.modal').show()
-        },
-        function (){
-            $(this).children('.modal').hide()
+            $(this).children('.modal').toggle()
         }
     )
 </script>
