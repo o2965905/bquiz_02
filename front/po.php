@@ -21,15 +21,31 @@
     </fieldset>
     <fieldset style="width:75%">
         <legend>文章列表</legend>
-        <div>文章內容</div>
+        <div id='content'></div>
     </fieldset>
 </div>
 
 
 <script>
+    
+    getList('健康新知');
+
     $(".type").on("click",function(){
         let type=$(this).text() //抓到標題的文字
+        // console.log(type)
         $("#header").text(type) //id=header ,文字替換成點選到的標題文字
-        console.log(type)
+        getList(type); //拿到列表內容
     })
+
+    function getList(type){ //拿到列表參數
+        $.get("./api/get_list.php",{type},(list)=>{
+            $("#content").html(list)
+        })
+    }
+
+    function getNews(id){
+        $.get("./api/get_news.php",{id},(news)=>{
+            $("#content").html(news)
+        })
+    }
 </script>
