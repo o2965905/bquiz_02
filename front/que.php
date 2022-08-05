@@ -18,7 +18,7 @@
             <td><?=$subject['text'];?></td>
             <td class="ct"><?=$subject['count'];?></td>
             <td class="ct">
-                <a href="?do=result&id=<?$subject['id'];?>">結果</a>
+                <a href="?do=result&id=<?=$subject['id'];?>">結果</a>
             </td>
             <td class="ct">
                 <?php
